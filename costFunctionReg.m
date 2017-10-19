@@ -17,8 +17,13 @@ grad = zeros(size(theta));
 %               Compute the partial derivatives and set grad to the partial
 %               derivatives of the cost w.r.t. each parameter in theta
 
+n = size(theta, 1) - 1; % to correspond to initial num of features
 
+h = sigmoid(X*theta);
+J = -1/m * (y'*log(h) + (1-y)'*log(1-h)) + lambda/(2*m) * sum(theta(2:n+1,:).^2);
 
+grad = 1/m * X' * (h - y) + lambda/m * [0;theta(2:n+1,:)]; %adding vector with  
+% first zero and the theta values starting from 2nd element
 
 
 
